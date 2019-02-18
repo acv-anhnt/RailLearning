@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
   validates :title, :description, presence: true 
-
+  validates :price, numericality: {greater_than: 0}
   validate :title_is_shorter_than_description
 
   def title_is_shorter_than_description
