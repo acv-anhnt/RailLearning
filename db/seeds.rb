@@ -27,3 +27,10 @@ category1.products << [product1, product2, product3]
 puts product1.category.title
 
 ap category1.products
+
+products = Product.includes(:category).limit(10)
+products.each do |product|
+  puts product.title
+  puts product.category.title
+end
+puts "----------------"
