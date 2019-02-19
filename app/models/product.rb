@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+  belongs_to :category, optional: true
   before_save :strip_html_from_description, :set_lower_title
   scope :published, -> { where(published: true) }
   scope :priced_more_than, ->(price) { where('price > ?', price) }
