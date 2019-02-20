@@ -41,4 +41,14 @@ ap productL
 productL.level = 'medium'
 ap productL
 
+productL.country = :JP
+ap productL
 
+productL.country = "Zimbabwe"
+ap productL
+
+productL.save
+
+ap productL.country.value
+
+# ap ISO3166::Country.translations[productL.country]

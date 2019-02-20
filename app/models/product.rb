@@ -1,7 +1,8 @@
 class Product < ApplicationRecord
   extend Enumerize
-  enumerize :level, in: [:easy, :medium, :hard], default: :easy
 
+  enumerize :level, in: [:easy, :medium, :hard], default: :easy
+  enumerize :country, in: ISO3166::Country.translations, default: :VN
   belongs_to :category, optional: true
   before_save :strip_html_from_description, :set_lower_title
   scope :published, -> { where(published: true) }
