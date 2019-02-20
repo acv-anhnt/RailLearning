@@ -15,7 +15,7 @@ ActiveRecord::Base.connection.execute(
   'UPDATE SQLITE_SEQUENCE SET seq = 0 WHERE name = \'categories\''
   )
 product1 = Product.create(title: 'Ruby book', description: 'Learn Ruby programming', price: 12.99, published: true)
-product2 = Product.create(title: 'jQuery Book', description: 'Learn jQuery', price: 11.99, published: true)
+product2 = Product.create(title: 'jQuery Book', description: 'Learn jQuery', price: 11.99)
 product3 = Product.create(title: 'SASS Book', description: 'Learn CSS with SASS', price: 19.99, published: true)
 category1 = Category.create(title: 'Programming')
 Category.create(title: 'Literature')
@@ -52,3 +52,4 @@ productL.save
 ap productL.country.value
 
 # ap ISO3166::Country.translations[productL.country]
+
