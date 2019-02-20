@@ -34,3 +34,11 @@ products.each do |product|
   puts product.category.title
 end
 puts "----------------"
+
+productL = Product.create!(title: 'Ruby Hard level', description: 'Advanced Ruby book', price: 12.99, published: true, level: :hard)
+ap productL
+
+productL.level = 'medium'
+ap productL
+
+

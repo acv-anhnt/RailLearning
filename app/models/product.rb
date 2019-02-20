@@ -1,4 +1,7 @@
 class Product < ApplicationRecord
+  extend Enumerize
+  enumerize :level, in: [:easy, :medium, :hard], default: :easy
+
   belongs_to :category, optional: true
   before_save :strip_html_from_description, :set_lower_title
   scope :published, -> { where(published: true) }
