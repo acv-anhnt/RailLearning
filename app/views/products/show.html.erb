@@ -2,4 +2,5 @@
 <p><%= @product.description %></p>
 <p><%= @product.category.try(:title) %></p>
 <p><%= @product.level %></p>
+<p><%= @product.country %></p>
 <%= link_to('To product list', products_path) %>

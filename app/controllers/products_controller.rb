@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
   end
 
   def create
-    product_params = params.require(:product).permit(:title, :description, :price, :published, :category_id)
+    product_params = params.require(:product).permit(:title, :description, :price, :published, :category_id, :level, :country)
     @product = Product.new(product_params)
     if @product.save
       flash[:notice] = 'You have successfully created the product'
@@ -29,7 +29,7 @@ class ProductsController < ApplicationController
   end
 
   def update
-    product_params = params.require(:product).permit(:title, :description, :price, :published, :category_id)
+    product_params = params.require(:product).permit(:title, :description, :price, :published, :category_id, :level, :country)
     @product = Product.find(params[:id])
     if @product.update(product_params)
       flash[:notice] = 'You have successfully updated the product'
@@ -38,5 +38,14 @@ class ProductsController < ApplicationController
       flash.now[:notice] = 'There is an error when updating'
       render :new
     end
+  end
+
+  def destroy
+    if Product.destroy(params[:id])
+      flash[:notice] = 'You have successfully deleted the product'
+    else
+      flash[:notice] = 'There is an error when deleting'
+    end
+    redirect_to products_path
   end
 end
