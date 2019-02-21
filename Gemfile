@@ -51,6 +51,13 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'awesome_print'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'byebug'
+  gem 'pry-byebug'
+  gem 'pry-rails'
+  gem 'pry-doc'
+  gem 'pry-stack_explorer'
 end
 
 group :test do
