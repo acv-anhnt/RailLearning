@@ -5,4 +5,7 @@ class ProductsController < ApplicationController
   def show
     @product = Product.includes(:category).find(params[:id])
   end
+  def new
+    @product = Product.new
+  end
 end
