@@ -2,3 +2,4 @@
 <p><%= @product.description %></p>
 <p><%= @product.category.try(:title) %></p>
 <p><%= @product.level %></p>
+<%= link_to('To product list', products_path) %>
