@@ -1,10 +1,10 @@
 class ProductsController < ApplicationController
+  before_action :find_product, only: [:show, :edit, :update, :destroy]
   def index
     @products = Product.includes(:category).published
   end
 
   def show
-    @product = Product.includes(:category).find(params[:id])
   end
 
   def new
@@ -12,40 +12,54 @@ class ProductsController < ApplicationController
   end
 
   def create
-    product_params = params.require(:product).permit(:title, :description, :price, :published, :category_id, :level, :country)
     @product = Product.new(product_params)
-    if @product.save
-      flash[:notice] = 'You have successfully created the product'
-      redirect_to products_path
-    else
-      flash.now[:notice] = 'There is an error in your form'
-      render :new
+    unless @product.save
+      flash.now[:notice] = fail_message(:creating)
+      return render :new
     end
+
+    redirect_to products_path, notice: success_message(:created)
   end
 
   def edit
-    @product = Product.find(params[:id])
     render :new
   end
 
   def update
-    product_params = params.require(:product).permit(:title, :description, :price, :published, :category_id, :level, :country)
-    @product = Product.find(params[:id])
-    if @product.update(product_params)
-      flash[:notice] = 'You have successfully updated the product'
-      redirect_to product_path(@product)
-    else
-      flash.now[:notice] = 'There is an error when updating'
-      render :new
+    unless @product.update(product_params)
+      flash.now[:notice] = fail_message(:updating)
+      return render :new
     end
+
+    redirect_to product_path(@product), notice: success_message(:updated)
   end
 
   def destroy
-    if Product.destroy(params[:id])
-      flash[:notice] = 'You have successfully deleted the product'
-    else
-      flash[:notice] = 'There is an error when deleting'
-    end
-    redirect_to products_path
+    message = fail_message(:destroying)
+    message = success_message(:destroyed) if @product.destroy
+
+    redirect_to products_path, notice: message
+  end
+
+  private
+
+  def success_message(action)
+    "You have successfully #{action} the product"
+  end
+  def fail_message(action)
+    "There is an error when #{action}"
+  end
+  def find_product
+    @product = Product.find(params[:id])
+  end
+  def product_params
+    params.require(:product).permit(
+      :title,
+      :description,
+      :price,
+      :published,
+      :category_id,
+      :level,
+      :country)
   end
 end

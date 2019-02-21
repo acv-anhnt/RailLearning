@@ -3,11 +3,15 @@ class Product < ApplicationRecord
 
   enumerize :level, in: [:easy, :medium, :hard], default: :easy
   enumerize :country, in: ISO3166::Country.translations, default: :VN
+
   belongs_to :category, optional: true
+
   before_save :strip_html_from_description, :set_lower_title
+
   scope :published, -> { where(published: true) }
   scope :priced_more_than, ->(price) { where('price > ?', price) }
-  scope :priced_more_than_index, -> (price) { where('price > ?', price).select(:price, :index) }
+  scope :priced_more_than_index, ->(price) { where('price > ?', price).select(:price, :index) }
+
   validates :title, :description, presence: true
   validates :price, numericality:{ greater_than: 0 }
   validate :title_is_shorter_than_description
