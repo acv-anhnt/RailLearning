@@ -1,9 +1,9 @@
-table
+h1 Product list
+table.table.table-striped
   tr
     th Name
     th Price
     th Category
     th Published
   = render partial: 'product', collection: @products
-
 = link_to('Add New Product', new_product_path)
