@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.0'
+gem 'slim-rails'
 gem 'enumerize'
 gem 'country_select', '~> 4.0'
 gem 'formtastic', '~> 3.0'

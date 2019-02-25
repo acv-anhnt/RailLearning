@@ -1,0 +1,6 @@
+h1 = @product.title
+p = @product.description
+p = @product.category.try(:title)
+p = @product.level
+p = @product.country
+= link_to('To product list', products_path)
