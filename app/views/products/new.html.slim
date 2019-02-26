@@ -6,6 +6,6 @@ h1 Create new products
   = f.input :price, min: 0.01
   = f.input :published
   = f.input :category
-  = f.input :country
+  = f.input :country, as: :select, collection: ISO3166::Country.translations.invert
   = f.input :level
   = f.action :submit
