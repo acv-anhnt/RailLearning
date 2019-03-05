@@ -8,4 +8,5 @@ h1 Create new products
   = f.input :category
   = f.input :country, as: :select, collection: ISO3166::Country.translations.invert
   = f.input :level
+  = f.input :image
   = f.action :submit

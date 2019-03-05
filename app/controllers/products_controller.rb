@@ -60,6 +60,7 @@ class ProductsController < ApplicationController
       :published,
       :category_id,
       :level,
-      :country)
+      :country,
+      :image)
   end
 end

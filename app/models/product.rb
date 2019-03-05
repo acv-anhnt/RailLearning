@@ -1,5 +1,7 @@
 class Product < ApplicationRecord
   extend Enumerize
+  after_create :send_notify_after_creating
+  mount_uploader :image, ImageUploader
 
   enumerize :level, in: [:easy, :medium, :hard], default: :easy
   enumerize :country, in: ISO3166::Country.translations, default: :VN
@@ -15,6 +17,10 @@ class Product < ApplicationRecord
   validates :title, :description, presence: true
   validates :price, numericality:{ greater_than: 0 }
   validate :title_is_shorter_than_description
+
+  def send_notify_after_creating
+    ProductMailer.send_notify_after_creating_product(self).deliver_now
+  end
 
   def title_is_shorter_than_description
     return if title.blank? || description.blank?
